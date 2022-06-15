@@ -1,0 +1,6 @@
+=============== May 10, 2022 (+07) ===============
+02:27:20.408982 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+02:27:20.425194 db@open opening
+02:27:20.425630 version@stat F·[] S·0B[] Sc·[]
+02:27:20.431114 db@janitor F·2 G·0
+02:27:20.431134 db@open done T·5.920945ms
