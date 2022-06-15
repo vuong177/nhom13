@@ -471,20 +471,20 @@ func NewCraftApp(
 		transferModule := transfer.NewAppModule(app.TransferKeeper)
 		transferIBCModule := transfer.NewIBCModule(app.TransferKeeper)
 
-		mockModule := ibcmock.NewAppModule(scopedIBCMockKeeper, &app.IBCKeeper.PortKeeper)
-		mockIBCModule := ibcmock.NewIBCModule(&ibcmock.MockIBCApp{}, scopedIBCMockKeeper)
+		mockModule := ibcmock.NewAppModule(&app.IBCKeeper.PortKeeper)
+		mockIBCModule := ibcmock.NewIBCModule(&mockModule, ibcmock.NewMockIBCApp(ibcmock.ModuleName, scopedIBCMockKeeper))
 
 		app.ICAControllerKeeper = icacontrollerkeeper.NewKeeper(
 			appCodec, keys[icacontrollertypes.StoreKey], app.GetSubspace(icacontrollertypes.SubModuleName),
 			app.IBCKeeper.ChannelKeeper, // may be replaced with middleware such as ics29 fee
 			app.IBCKeeper.ChannelKeeper, &app.IBCKeeper.PortKeeper,
-			scopedICAControllerKeeper, app.MsgSvcRouter,
+			scopedICAControllerKeeper, app.msgSvcRouter,
 		)
 
 		app.ICAHostKeeper = icahostkeeper.NewKeeper(
 			appCodec, keys[icahosttypes.StoreKey], app.GetSubspace(icahosttypes.SubModuleName),
 			app.IBCKeeper.ChannelKeeper, &app.IBCKeeper.PortKeeper,
-			app.AccountKeeper, scopedICAHostKeeper, app.MsgSvcRouter,
+			app.AccountKeeper, scopedICAHostKeeper, app.msgSvcRouter,
 		)
 
 		icaModule := ica.NewAppModule(&app.ICAControllerKeeper, &app.ICAHostKeeper)
