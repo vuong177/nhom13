@@ -18,4 +18,4 @@ ENV CRAFT_P2P_SEED_MODE=true
 
 RUN pacman -Syyu --noconfirm 
 
-COPY --from=builder /go/bin/craftd /usr/bin/craftd
+COPY --from=builder /go/bin/nhom13 /usr/bin/nhom13
